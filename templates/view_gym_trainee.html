@@ -1,0 +1,49 @@
+{% include 'admin_nav.html' %}
+<body style="background-color:#7BE0AD;">
+    <div class="row">
+        {% for gym_trainee in gym_trainees %}
+        <div class="w-30 m-30" >
+            <div class="p-15" style="background-color: #AEE5D8;box-shadow:0 0 20px black;">
+                <div class="card-item">
+                    <div class="form-input">
+                        Gym Trainee Name:-
+                    </div>
+                    <div class="card-text mr-20">
+                        {{gym_trainee['name']}}
+                    </div>
+                    <div class="form-input">
+                        Email:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_trainee['email']}}
+                    </div>
+                    <div class="form-input">
+                        Phone Number:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_trainee['phone']}}
+                    </div>
+                    <div class="form-input">
+                        Age:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_trainee['age']}}
+                    </div>
+                    <div class="form-input">
+                        Gender:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_trainee['gender']}}
+                    </div>
+                    <div class="form-input">
+                        Address:-
+                    </div>
+                    <div class="card-text" style="height:50px;overflow:auto">
+                        {{gym_trainee['address']}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>

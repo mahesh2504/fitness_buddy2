@@ -1,0 +1,12 @@
+{% if session['role'] == 'gym_trainee'%}
+    {% include 'gym_trainee_nav.html'%}
+{% endif %}
+{% if session['role'] == 'admin'%}
+    {% include 'admin_nav.html'%}
+{% endif %}
+{% if session['role'] == 'gym_trainer'%}
+    {% include 'gym_trainer_nav.html'%}
+{% endif %}
+<div class="text-center m-100" style="font-size:25px;font-weight:bold;">
+    <h3>{{message}}</h3>
+</div>

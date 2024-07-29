@@ -1,0 +1,102 @@
+{% if session['role'] == 'admin'%}
+    {% include 'admin_nav.html'%}
+{% endif %}
+{% if session['role'] == 'gym_trainee'%}
+    {% include 'gym_trainee_nav.html'%}
+{% endif %}
+{% if session['role'] == 'gym_trainer'%}
+    {% include 'gym_trainer_nav.html'%}
+{% endif %}
+<body class="add_gym_trainer">
+    <div class="row">
+        {% if session['role'] == "admin" %}
+            <div class=" w-30 m-100 card_add_trainer">
+                <form action="gym_trainer_action" method="post">
+                    <div class=" p-20">
+                        <div class="form-title text-center mt-10">
+                            Add Gym trainer
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="first_name">First Name</label>
+                            <input type="text" id="first_name" name="first_name" class="input w-100 mt-10 p-15"  placeholder="Enter the First Name" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" id="last_name" name="last_name" class="input w-100 mt-10 p-15"  placeholder="Enter the Last Name" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email" class="input w-100 mt-10 p-15"  placeholder="Enter  Email" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="input w-100 mt-10 p-15" placeholder="Enter Password" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="phone">Phone Number</label>
+                            <input type="number" id="phone" name="phone" class="input w-100 mt-10 p-15"  placeholder="Enter Your Phone Number" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="ssn">SSN</label>
+                            <input type="number" id="ssn" name="ssn" class="input w-100 mt-10 p-15"  placeholder="Enter Your Social Security Number" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="date_of_birth">DOB</label>
+                            <input type="date" id="date_of_birth" name="date_of_birth" class="input w-100 mt-10 p-15"  placeholder="Enter Your Date Of Birth" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="experience">Experience</label>
+                            <input type="text" id="experience" name="experience" class="input w-100 mt-10 p-15"  placeholder="Enter Your Experience" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" class="input w-100 mt-10 p-15"  placeholder="Enter Your State" required>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address" class="input w-100 mt-10 p-15"  placeholder="Enter Your Address" required></textarea>
+                        </div>
+                        <div class="form-input mt-10">
+                            <label for="zip_code">ZIP Code</label>
+                            <input type="number" id="zip_code" name="zip_code" class="input w-100 mt-10 p-15"  placeholder="Enter Your ZIP Code" required>
+                        </div>
+                        <div class="text-center ">
+                            <input type="submit" class="btn m-10 p-10" value="Add Trainer">
+                        </div>
+                        <div class="form-input">
+                            {{message}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+        <div class="w-60 m-100">
+            <div class=" p-5 ">
+                <div class="form-title text-center mt-10">Gym Trainer List</div>
+                <div class="row">
+                    {% for gym_trainer in gym_trainers %}
+                        <div class=" p-15 m-10" style="background-color:#ECE4B7;box-shadow:0 0 20px black;">
+                            <div class="form-input">Gym Trainer Name</div>
+                            <div>{{gym_trainer['first_name']}} {{gym_trainer['last_name']}}</div>
+                            <div class="form-input">Email</div>
+                            <div>{{gym_trainer['email']}}</div>
+                            <div class="form-input">Phone Number</div>
+                            <div>{{gym_trainer['phone']}}</div>
+                            <div class="form-input">Date Of Birth</div>
+                            <div>{{gym_trainer['date_of_birth']}}</div>
+                            <div class="form-input">Experience</div>
+                            <div>{{gym_trainer['experience']}}</div>
+                            <div class="form-input">Address</div>
+                            <div>{{gym_trainer['address']}}</div>
+                            {% if session['role'] == "gym_trainee" %}
+                                <div class=" text-center mt-5">
+                                    <a href="sessions?gym_trainer_id={{gym_trainer['_id']}}" class="link p-5">View sessions</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

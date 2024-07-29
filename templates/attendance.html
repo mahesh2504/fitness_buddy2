@@ -1,0 +1,61 @@
+{% if session['role'] == 'gym_trainee'%}
+    {% include 'gym_trainee_nav.html'%}
+{% endif %}
+{% if session['role'] == 'gym_trainer'%}
+    {% include 'gym_trainer_nav.html'%}
+{% endif %}
+<body style="background-color:#7D6167;">
+    <div class="row">
+        {% if session['role'] == "gym_trainer" %}
+        <div class=" w-30 m-100" style="background-color:#E6DBD0;box-shadow:0 0 20px black;">
+            <form action="attendance_action" method="post">
+                <div class=" p-20">
+                    <div class="form-title text-center mt-10">
+                        Add Attendance
+                    </div>
+                    <input type="hidden" name="enrollment_id" value="{{enrollment_id}}">
+                    <div class="form-input mt-10">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" class="input w-100 mt-10 p-15"  placeholder="Enter the Date" required>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for=>Attendance</label>
+                        <select name="attendance" class="input w-100 mt-10 p-15">
+                            <option value="">choose attendance</option>
+                            <option value="present">Present</option>
+                            <option value="absent">Absent</option>
+                        </select>
+                    </div>
+                    <div class="text-center ">
+                        <input type="submit" class="btn m-10 p-10" value="Add Attendance">
+                    </div>
+                    <div class="form-input">
+                        {{message}}
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+        <div class=" w-60 m-100">
+            <div class=" p-5 ">
+                <div class="form-title text-center mt-10">Attendance</div>
+                <div class="row space-around">
+                    {% for attendance in attendances %}
+                    {% set enrollments = get_enrollments_by_enrollment_id(attendance['enrollment_id']) %}
+                    {% set gym_trainees = get_gym_trainees_by_gym_trainee_id(enrollments['gym_trainee_id']) %}
+                        <div class=" p-15 m-10" style="background-color:#E6DBD0;box-shadow:0 0 20px black;">
+                            <div class="p-5">
+                                <div>Date</div>
+                                <div class="form-input">{{attendance['date'].strftime("%d-%m-%Y")}}</div>
+                                <div>Attendance</div>
+                                <div class="form-input">{{attendance['attendance']}}</div>
+                                <div>Gym Trainee</div>
+                                <div class="form-input">{{gym_trainees['name']}}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

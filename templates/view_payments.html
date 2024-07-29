@@ -1,0 +1,58 @@
+{% if session['role'] == 'gym_trainee'%}
+    {% include 'gym_trainee_nav.html'%}
+{% endif %}
+{% if session['role'] == 'gym_trainer'%}
+    {% include 'gym_trainer_nav.html'%}
+{% endif %}
+<body style="background-color:#537A5A;">
+    <div class="row">
+        <div class=" w-20  p-15 m-100"  style="background-color:#9AE19D;box-shadow:0 0 20px black;">
+            <div class="form-input">
+                Date
+            </div>
+            <div>
+                {{payment['date'].strftime("%d-%m-%Y %I:%M %p")}}
+            </div>
+            <div>
+                <div class="form-input">
+                Card Number
+                </div>
+                <div>
+                    {{payment['card_number']}}
+                </div>
+            </div>
+            <div>
+                <div class="form-input">
+                Card Holder Number
+                </div>
+                <div>
+                    {{payment['card_holder_name']}}
+                </div>
+            </div>
+            <div>
+                <div class="form-input">
+                Total Price
+                </div>
+                <div>
+                    $ {{payment['price']}}
+                </div>
+            </div>
+            <div>
+                <div class="form-input">
+                CVV Number
+                </div>
+                <div>
+                    {{payment['cvv']}}
+                </div>
+            </div>
+            <div>
+                <div class="form-input">
+                Status
+                </div>
+                <div>
+                    {{payment['status']}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

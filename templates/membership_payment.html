@@ -1,0 +1,32 @@
+{% include 'navbar.html'%}
+<body style="background-color:#FF9FB2;">
+      <div class="w-35 m-100" style="background-color:#FBDCE2;box-shadow:0 0 20px black;">
+           <form action="membership_payment_action" method="post">
+                <div class="form-title text-center card-header mt-30">Membership Payment Details</div>
+                <div class="form-title text-center">Total Price: $ {{price}}</div>
+                <input type="hidden" name="membership_title" value="{{membership_title}}">
+                <input type="hidden" name="price" value="{{price}}">
+                <div class="p-20">
+                     <div class="form-input">
+                          <label for="card_number" class="label">Card Number: </label><br>
+                          <input type="number" id="card_number"  name="card_number" class="input w-100 p-15" placeholder="Enter Card Number" required>
+                     </div>
+                    <div class="form-input mt-20">
+                          <label for="card_holder_name" class="label">Card Holder Name: </label><br>
+                          <input type="text" id="card_holder_name"  name="card_holder_name" class="input w-100 p-15" placeholder="Enter Card Holder Name" required>
+                    </div>
+                    <div class="form-input mt-20">
+                          <label for="expired_date" class="label">Expired Date: </label><br>
+                          <input type="month" id="expired_date"  name="expired_date" class="input w-100 p-15" placeholder="Enter Expired Date" required>
+                    </div>
+                    <div class="form-input mt-20">
+                          <label for="cvv" class="label">CVV Number: </label><br>
+                          <input type="number" id="cvv"  name="cvv" class="input w-100 p-15" placeholder="Enter CVV Number" required>
+                    </div>
+                    <div class="mt-10 text-center">
+                        <input type="submit" class="btn mt-5 p-5 w-100" value="PAY">
+                    </div>
+                </div>
+           </form>
+      </div>
+</body>

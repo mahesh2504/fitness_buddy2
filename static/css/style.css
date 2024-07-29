@@ -1,0 +1,95 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+.main-image{
+    position: relative;
+}
+.image-text{
+    font-family: "Lugrasimo", cursive;
+    font-size: 50px;
+    color:white;
+    text-align: center;
+    position: absolute;
+    top:100px;
+}
+.admin_image{
+    background-image: url(https://img.freepik.com/premium-photo/illustration-fitness-equipments-design-background_916191-39402.jpg?w=996);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.admin{
+    background-color: rgba(240, 248, 255, 0.685);
+}
+.admin_home{
+    background-image: url(https://wallpapercrafter.com/th8007/1776286-black-and-white-blur-gray-iphone-laptop-macbook.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.trainer_image{
+    background-image: url(https://img.freepik.com/premium-photo/illustration-fitness-equipments-design-background_916191-39359.jpg?w=996);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.trainer{
+    background-color: rgba(0, 0, 0, 0.696);
+    color: white;
+}
+.trainee_image{
+    background-image: url(https://img.freepik.com/premium-photo/array-fitness-equipment-including-barbell-dumbbells-orange-weights_1123470-16024.jpg?w=996);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.trainee{
+    background-color: rgba(255, 255, 255, 0.642);
+}
+.link:hover{
+    background: #016ABC;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.trainer_home{
+    background-image: url(https://img.freepik.com/premium-photo/man-lifting-barbell-gym_1123470-7916.jpg?w=1060);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 95vh;
+}
+.text_home{
+    color: #fff;
+}
+.trainee_home{
+    background-image: url(https://img.freepik.com/premium-photo/man-lifting-barbell-gym_765582-1491.jpg?w=1060);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.add_gym_trainer{
+    background-color: #DAB785;
+    border-radius: 12px;
+}
+.card_add_trainer{
+    background-color: #D5896F;
+    border-radius: 12px;
+}
+.registration_trainee{
+    background-color: #484349;
+}
+.membership{
+    background-image: url(https://t3.ftcdn.net/jpg/02/83/94/24/240_F_283942440_0SyB71IssS3DsU0qe7YuwxulvUUatEnj.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}

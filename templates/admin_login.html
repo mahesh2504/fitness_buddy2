@@ -1,0 +1,23 @@
+{% include 'navbar.html' %}
+<body class="admin_image">
+    <div class="admin card w-30 m-100">
+        <form action="admin_login_action" method="post">
+            <div class="form-title text-center mt-10">
+                Admin Login
+            </div>
+            <div class="p-20">
+                <div class="form-input">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="input w-100 mt-20 p-15 "  placeholder="Enter the username" required>
+                </div>
+                <div class="form-input mt-10">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="input w-100 mt-20 p-15 " placeholder="Enter the Password" required>
+                </div>
+                <div class="text-center mt-30">
+                    <input type="submit" class="btn w-100 p-10" value="Login">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

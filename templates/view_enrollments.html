@@ -1,0 +1,73 @@
+{% if session['role'] == 'gym_trainee'%}
+    {% include 'gym_trainee_nav.html'%}
+{% endif %}
+{% if session['role'] == 'gym_trainer'%}
+    {% include 'gym_trainer_nav.html'%}
+{% endif %}
+<body style="background-color:#07393C;">
+    <div class="row space-around">
+    {% for enrollment in enrollments %}
+    {% set gym_trainee = get_gym_trainees_by_gym_trainee_id(enrollment['gym_trainee_id']) %}
+    {% set gym_session = get_gym_session_by_gym_session_id(enrollment['gym_session_id']) %}
+    {% set gym_trainer = get_gym_trainer_by_gym_trainer_id(gym_session['gym_trainer_id']) %}
+    <div class="w-23">
+        <div class="m-100" style="background-color:#90DDF0;box-shadow: 0 0 20px white;">
+            <div class="p-15">
+                <div class="card-item">
+                    <div class="form-input">
+                        Gym Trainee Name:-
+                    </div>
+                    <div class="card-text mr-20">
+                        {{gym_trainee['first_name']}} {{gym_trainee['last_name']}}
+                    </div>
+                    <div class="form-input">
+                        Email:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_trainee['email']}}
+                    </div>
+                    <div class="form-input">
+                        Gym Trainer Name:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_trainer['first_name']}} {{gym_trainer['last_name']}}
+                    </div>
+                    <div class="form-input">
+                        Gym Trainer Email:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_trainer['email']}}
+                    </div>
+                    <div class="form-input">
+                        Enrolled Date:-
+                    </div>
+                    <div class="card-text">
+                        {{enrollment['enrollment_date'].strftime("%d-%m-%Y")}}
+                    </div>
+                    <div class="form-input">
+                        Enrolled In Between:-
+                    </div>
+                    <div class="card-text">
+                        {{gym_session['session_start_date'].strftime("%d-%m-%Y")}} To {{gym_session['session_end_date'].strftime("%d-%m-%Y")}}
+                    </div>
+                    <div class="form-input">
+                        Session Status:-
+                    </div>
+                    <div class="card-text">
+                        {{enrollment['status']}}
+                    </div>
+                    {% if enrollment['status'] == "enrolled" %}
+                        <div class="text-center">
+                            <a href="attendance?enrollment_id={{enrollment['_id']}}" class="link p-5">Attendance</a>
+                        </div>
+                    {% endif %}
+                    <div class="text-center">
+                        <a href="view_payments?enrollment_id={{enrollment['_id']}}" class="link p-5">View Payments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>

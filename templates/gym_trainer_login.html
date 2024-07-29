@@ -1,0 +1,23 @@
+{% include 'navbar.html' %}
+<body class="trainer_image">
+    <div class="trainer card w-30 m-100">
+        <form action="gym_trainer_login_action" method="post">
+            <div class="form-title text-center mt-10" style="color: white;">
+                Gym Trainer Login
+            </div>
+            <div class="p-20">
+                <div class="form-input">
+                    <label for="email" style="color: white;">Email</label>
+                    <input type="email" id="email" name="email" class="input w-100 mt-20 p-15 "  placeholder="Enter the Email" required>
+                </div>
+                <div class="form-input mt-10">
+                    <label for="password" style="color: white;">Password</label>
+                    <input type="password" id="password" name="password" class="input w-100 mt-20 p-15 " placeholder="Enter the Password" required>
+                </div>
+                <div class="text-center mt-30">
+                    <input type="submit" class="btn w-100 p-10" value="Login">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

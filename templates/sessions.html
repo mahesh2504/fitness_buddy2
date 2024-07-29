@@ -1,0 +1,120 @@
+{% if session['role'] == 'gym_trainee'%}
+    {% include 'gym_trainee_nav.html'%}
+{% endif %}
+{% if session['role'] == 'gym_trainer'%}
+    {% include 'gym_trainer_nav.html'%}
+{% endif %}
+<body style="background-color:#E9AFA3;">
+    <div class="row">
+        {% if session['role'] == "gym_trainer" %}
+        <div class=" w-30 m-100" style="background-color:#F9DEC9;box-shadow:0 0 20px black;">
+            <form action="sessions_action" method="post">
+                <div class=" p-20">
+                    <div class="form-title text-center mt-10">
+                        Add Session
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="session_start_date">Session Start Date</label>
+                        <input type="date" id="session_start_date" name="session_start_date" class="input w-100 mt-10 p-15"  placeholder="Enter the Session Start Date" required>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="session_end_date">Session End Date</label>
+                        <input type="date" id="session_end_date" name="session_end_date" class="input w-100 mt-10 p-15"  placeholder="Enter Session End Date" required>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="start_time_on_day">Session Start Time</label>
+                        <input type="time" id="start_time_on_day" name="start_time_on_day" class="input w-100 mt-10 p-15" placeholder="Enter Session Start Time" required>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="end_time_on_day">Session End Time</label>
+                        <input type="time" id="end_time_on_day" name="end_time_on_day" class="input w-100 mt-10 p-15"  placeholder="Enter Session End Time" required>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="number_of_seats">Total Seats</label>
+                        <input type="number" id="number_of_seats" name="number_of_seats" class="input w-100 mt-10 p-15"  placeholder="Enter Available Seats" required>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="price">Session Price</label>
+                        <input type="number" id="price" name="price" class="input w-100 mt-10 p-15"  placeholder="Session Price" required>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="about_session">About Session</label>
+                        <textarea id="about_session" name="about_session" class="input w-100 mt-10 p-15"  placeholder="About The Session" required></textarea>
+                    </div>
+                    <div class="form-input mt-10">
+                        <label for="objective">Objective</label>
+                        <textarea id="objective" name="objective" class="input w-100 mt-10 p-15"  placeholder="Objective" required></textarea>
+                    </div>
+                    <div class="text-center ">
+                        <input type="submit" class="btn m-10 p-10" value="Add Session">
+                    </div>
+                    <div class="form-input">
+                        {{message}}
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+        <div class=" w-60 m-100">
+            <div class=" p-5 ">
+                <div class="form-title text-center mt-10">Session List</div>
+                <div class="row">
+                    {% for gym_session in gym_sessions %}
+                    {% set enrolled_count = set_enrolled_count_by_session_id(gym_session['_id'])%}
+                        <div class="p-15 m-10" style="background-color:#F9DEC9;box-shadow:0 0 20px black;">
+                            <div>Session Start Date</div>
+                            <div class="form-input">{{gym_session['session_start_date'].strftime("%d-%m-%Y")}}</div>
+                            <div>Session End Date</div>
+                            <div class="form-input">{{gym_session['session_end_date'].strftime("%d-%m-%Y")}}</div>
+                            <div>Session Start Time</div>
+                            <div class="form-input">{{gym_session['start_time_on_day'].strftime("%H:%M %p")}}</div>
+                            <div>Session End Time</div>
+                            <div class="form-input">{{gym_session['end_time_on_day'].strftime("%H:%M %p")}}</div>
+                            <div>Available Seats</div>
+                            <div class="form-input">{{gym_session['number_of_seats']}}</div>
+                            <div>Price</div>
+                            <div class="form-input">$ {{gym_session['price']}}</div>
+                            <div>Number of seats Enrolled</div>
+                            <div class="form-input">{{enrolled_count}}</div>
+                            <div>Status</div>
+                            <div class="form-input">{{gym_session['status']}}</div>
+                            {% if session['role'] == 'gym_trainee' %}
+                                {% if int(enrolled_count)-int(gym_session['number_of_seats']) > 0 %}
+                                    <div>Available Seats</div>
+                                    <div class="form-input">{{int(enrolled_count)-int(gym_session['number_of_seats'])}}</div>
+                                {% endif %}
+                            {% endif %}
+                            {% if session['role'] == "gym_trainee" %}
+                                {% set is_enrolled = is_gym_trainee_enrolled() %}
+                                    {% if is_enrolled %}
+                                        <div>
+                                            <a href="view_enrollments?gym_session_id={{gym_session['_id']}}" class="link p-5">View Enrollment</a>
+                                        </div>
+                                    {% else %}
+                                        {% if gym_session['status'] == "Available" %}
+                                            {% if int(enrolled_count)-int(gym_session['number_of_seats']) < 0 %}
+                                                <div class="text-center">
+                                                    <a href="payment?gym_session_id={{gym_session['_id']}}&price={{gym_session['price']}}" class="link p-5">Enroll</a>
+                                                </div>
+                                            {% else %}
+                                                <div class="form-input">
+                                                    Seats Not Available
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                            {% endif %}
+                            {% if session['role'] == "gym_trainer" %}
+                                {% if gym_session['status'] == "Available" %}
+                                    <div class="text-center">
+                                        <a href="suspend?gym_session_id={{gym_session['_id']}}" class="link p-5">Suspend</a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
